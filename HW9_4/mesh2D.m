@@ -1,4 +1,4 @@
-function [xnode, ynode, B] = mesh2D(N_radial, N_circ, R, Lx, Ly, plot_on)
+function [xnode, ynode, nodes, B, delta] = mesh2D(N_radial, N_circ, R, Lx, Ly, plot_on)
     
     % assign radial and circumferential line numbers
     N = N_radial;
@@ -66,11 +66,13 @@ function [xnode, ynode, B] = mesh2D(N_radial, N_circ, R, Lx, Ly, plot_on)
     % organize all nodes in order
     xnode = zeros(1, n_nodes);
     ynode = zeros(1, n_nodes);
+    nodes = zeros(1, n_nodes);
     for k = 1:N
         x_line = linspace(xc(k), x_CCW(k), M);
         y_line = linspace(yc(k), y_CCW(k), M);
         for l = 1:M
             ic = (k-1) * M + l;
+            nodes(ic) = ic;
             xnode(ic) = -x_line(l);
             ynode(ic) = y_line(l);
         end
