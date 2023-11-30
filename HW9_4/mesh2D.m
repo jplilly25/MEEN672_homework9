@@ -121,7 +121,7 @@ function [xnode, ynode, nodes, B, delta] = mesh2D(N_radial, N_circ, R, Lx, Ly, p
         title('Mesh Check Plot')
         xlabel('X axis (m)');
         ylabel('Y axis (m)');
-        axis([-1.125 * Lx, 0.125 * Lx, -0.125 * Ly, 1.125 * Ly]);
+%         axis([-1.125 * Lx, 0.125 * Lx, -0.125 * Ly, 1.125 * Ly]);
     end
 
 end
