@@ -3,7 +3,7 @@ close all; clear all; clc;
 % domain parameters
 R = 0.01; % m
 Lx = 0.04; % m
-Ly = 0.03; % m
+Ly = 0.02; % m
 kx = 10; % W/(m*C)
 ky = 10; % W/(m*C)
 betaT = 40; % W/(m^2*C)
@@ -12,7 +12,7 @@ T_inf = 20; % C
 % discretization parameters
 N_radial = 19; % number of radial lines
 N_circ = 19; % number of circumferential lines
-plot_on = true;
+plot_on = false;
 
 % create the mesh and count nodes and elements
 [xnode, ynode, nodes, B, delta] = mesh2D(N_radial, N_circ, R, Lx, Ly, plot_on);
@@ -207,6 +207,8 @@ figure
 XS = zeros(N_radial, N_circ);
 YS = zeros(N_radial, N_circ);
 
+y_zero = zeros(1, N_circ);
+
 for i = 1:N_circ
     for j = 1:N_radial
         ic = (i-1) * N_circ + j;
@@ -215,11 +217,13 @@ for i = 1:N_circ
         ZS(i, j) = Usystem(N_circ*(i-1) + j);
 
         if YS(i,j) == 0
-            ic
-            ZS(i,j)
+            ic;
+            y_zero(j) = ZS(i,j);
         end
     end
 end
+
+print_output('y_zero', y_zero')
 
 contourf(XS, YS, ZS)
 c = colorbar;
